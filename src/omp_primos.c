@@ -2,20 +2,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include <omp.h>
-#define PBITS32  ((1<<2) | (1<<3) | (1<<5) | (1<<7) | (1<<11) | (1<<13) | \
-                  (1UL<<17) | (1UL<<19) | (1UL<<23) | (1UL<<29) | (1UL<<31))
-
-int isprime(unsigned int n) {
-    if (n < 32)
-        return (PBITS32 >> n) & 1;
-    if ((n & 1) == 0)
-        return 0;
-    for (unsigned int p = 3; p * p <= n; p += 2) {
-        if (n % p == 0)
-            return 0;
-    }
-    return 1;
-}
 
 int primo (long int n) {
 	long int i;
@@ -39,7 +25,7 @@ long int i, n, total=0;
     t_inicio = omp_get_wtime();
 #pragma omp parallel for reduction(+:total) schedule(dynamic,10000) num_threads(4) 
     for (i = 3; i <= n; i += 2) 	
-         if(isprime(i) == 1) total++;
+         if(primo(i) == 1) total++;
 		
     total += 1;    /* Acrescenta o dois, que também é primo */
     t_fim = omp_get_wtime();
@@ -47,3 +33,4 @@ long int i, n, total=0;
     printf("Tempo de execução: %f \n", t_fim-t_inicio);
     return(0);
 }
+
