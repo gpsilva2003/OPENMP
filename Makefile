@@ -44,5 +44,3 @@ list:
 clean:
 	$(RM) $(PROGFILES) *~
 ## eof Makefile
-
-#pgcc -fast -acc -ta=tesla:managed -Minfo=accel -I/opt/pgi/linux86-64/19.10/mpi/openmpi-3.1.3/include -L/opt/pgi/linux86-64/19.10/mpi/openmpi-3.1.3/lib -lmpi acc_funcoes.c  -o teste
