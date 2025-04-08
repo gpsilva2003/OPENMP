@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <omp.h>
 void trab1() {
      printf("Trab1.\n");
 }
@@ -8,16 +8,20 @@ void trab2() {
 }
     
 int main(int argc, char *argv[]) { /* omp_single.c  */
-#pragma omp parallel
+#pragma omp parallel num_threads(4)   // Região Paralela 
 {
-    #pragma omp single
+    #pragma omp single    // Apenas uma thread executa a primeira tarefa
+    {
     printf("Começando Trab1.\n");
     trab1();
-    #pragma omp single
     printf("Terminando Trab1.\n");
-    #pragma omp single
-    printf("Trab1 terminado e começando Trab2.\n");
+    }
+    #pragma omp single   // Essa segunda tarefa só será executada após a primeira
+    {
+    printf("Começando Trab2.\n");
     trab2();
+    printf("Terminando Trab2.\n");
+    }
 }
-    return(0);
+return(0);
 }
