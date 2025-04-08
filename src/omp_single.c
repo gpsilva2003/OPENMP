@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <omp.h>
 void trab1() {
-     printf("Trab1.\n");
+     printf("Trab1. executado pela thread %d \n", omp_get_thread_num());
 }
 void trab2() {
-    printf("Trab2.\n");
+    printf("Trab2. executado pela thread %d \n", omp_get_thread_num());
 }
     
 int main(int argc, char *argv[]) { /* omp_single.c  */
