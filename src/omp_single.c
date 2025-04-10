@@ -1,23 +1,20 @@
 #include <stdio.h>
-
-void trab1() {
-     printf("Trab1.\n");
+#include <omp.h>
+void trab1(int tid) {
+     printf("Executando trab1 na thread %d \n", tid);
 }
-void trab2() {
-    printf("Trab2.\n");
-}
-    
+void trab2(int tid) {
+    printf("Executando trab2 na thread %d \n", tid);
+} 
 int main(int argc, char *argv[]) { /* omp_single.c  */
-#pragma omp parallel
+#pragma omp parallel num_threads(4)
 {
+     int tid =  omp_get_thread_num();
+    /* Trecho executado por uma única thread, aleatoriamente */
     #pragma omp single
-    printf("Começando Trab1.\n");
-    trab1();
-    #pragma omp single
-    printf("Terminando Trab1.\n");
-    #pragma omp single
-    printf("Trab1 terminado e começando Trab2.\n");
-    trab2();
+    trab1(tid);
+    /* Trecho executado por todas as threads, sempre depois de trab1 */
+    trab2(tid);
 }
     return(0);
 }
