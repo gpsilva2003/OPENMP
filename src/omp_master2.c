@@ -2,11 +2,11 @@
 #include <omp.h>
 #include <unistd.h>
 void trab1() {
-     printf("Trab1 executado pela thread %d\n", omp_get_thread_num());
+     printf("Trab1 sendo executado pela thread %d\n", omp_get_thread_num());
      sleep(1);
 }
 void trab2() {
-     printf("Trab2 executado pela thread %d\n", omp_get_thread_num());
+     printf("Trab2 sendo executado pela thread %d\n", omp_get_thread_num());
 }
 int main(int argc, char *argv[]) { /* omp_master2.c  */
     #pragma omp parallel num_threads(8)
@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) { /* omp_master2.c  */
     	    trab1();
     	    printf("Terminando Trab1.\n");
         }
-        #pragma omp single // Executado por quaisquer threads em qualquer ordem
+        #pragma omp single // Executado por qualquer thread sem esperar Trab1 terminar
         {
     	    printf("Começando Trab2.\n");
     	    trab2();

@@ -10,15 +10,12 @@ int a[5], i;
         #pragma omp for
         for (i = 0; i < 5; i++)
             a[i] = i * i;
-
         // Imprime resultados intermediários
         #pragma omp master
             for (i = 0; i < 5; i++)
                 printf("a[%d] = %d\n", i, a[i]);
-
         // Espera
         #pragma omp barrier
-
         // Continua a computação
         #pragma omp for
         for (i = 0; i < 5; i++)
