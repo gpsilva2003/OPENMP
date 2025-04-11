@@ -3,4 +3,6 @@ old_src/
 
 bin/
 
+.vscode/
+
 Makefile.old
