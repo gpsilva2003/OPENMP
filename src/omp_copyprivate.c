@@ -11,6 +11,9 @@ float 	return_val;
 	}  /* o endereço armazenado no ponteiro é copiado  */
 #pragma omp master
 	{ /* a thread master faz a leitura do valor */
+		printf("Digite um valor: ");
+		fflush(stdout);
+		/* scanf não é thread-safe, por isso o uso de master */
 		scanf("%f", tmp);
 	}
 #pragma omp barrier
@@ -25,10 +28,9 @@ float 	return_val;
 }
 
 int main(int argc, char *argv[]) { /* omp_copyprivate.c  */
-   float a;
    #pragma omp parallel
    {
-	   a = read_next( );
+	   float a = read_next( );
 	   printf("Valor lido %.3f \n", a);
    }
 }
