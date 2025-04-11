@@ -1,0 +1,23 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compilar com OpenMP",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-fopenmp",
+                "-o",
+		"${workspaceFolder}/bin/${fileBasenameNoExtension}",
+                "${file}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+	    "detail": "Compila o arquivo C atual com suporte a OpenMP e salva em ./bin"
+        }
+    ]
+}
+

@@ -5,7 +5,7 @@ void trab1() {
      printf("Trab1. executado pela thread %d \n", omp_get_thread_num());
      sleep(1);
 }
-}
+
 void trab2() {
     printf("Trab2. executado pela thread %d \n", omp_get_thread_num());
 }
