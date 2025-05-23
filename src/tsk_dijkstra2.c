@@ -44,54 +44,40 @@ int dvv[NV][NV],    // Distância entre vértices vizinhos
 // versão com OpenMP tasks
 void busca() {
     #pragma omp parallel num_threads(4)
+    #pragma omp single
     {
-        #pragma omp single
-        {
-            numt = omp_get_num_threads();    
-            printf("Total de threads: %d \n",numt);  
-            for (int step = 0; step < NV; step++) {
-                dmt = LARGEINT;
-                vm = 0;
-
-                // Task: encontrar o menor caminho
-                for (int i = 1; i < NV; i++) {
-                    #pragma omp task firstprivate(i)
-                    {
-                        if (naopronto[i]) {
-                            #pragma omp critical
-                            {
-                                if (dmin[i] < dmt) {
-                                    dmt = dmin[i];
-                                    vm = i;
-                                }
-                            }
-                        }
-                    }
+    numt = omp_get_num_threads();    
+    printf("Total de threads: %d \n",numt);  
+    for (int step = 0; step < NV; step++) {
+        dmt = LARGEINT;
+        vm = 0;
+        // Task: encontrar o menor caminho
+        #pragma omp taskloop 
+        for (int i = 1; i < NV; i++) {          // Cria N tarefas    
+            if (naopronto[i]) {
+                #pragma omp critical
+                if (dmin[i] < dmt) {
+                    dmt = dmin[i];
+                    vm = i;
                 }
-
-                #pragma omp taskwait // espera todos os candidatos a mv
-                naopronto[vm] = 0;
-
-                // Task: atualizar caminhos com base em mv
-                for (int i = 1; i < NV; i++) {
-                    #pragma omp task firstprivate(i)
-                    {
-                        if (naopronto[i]) {
-                            int newdist = dmin[vm] + dvv[vm][i];
-                            if (newdist < dmin[i]) {
-                                #pragma omp critical
-                                dmin[i] = newdist;
-                            }
-                        }
-                    }
-                }
-
-                #pragma omp taskwait // espera todas atualizações
+            }
+        }
+        naopronto[vm] = 0;
+        // Task: atualizar caminhos com base em mv
+        #pragma omp taskloop 
+        for (int i = 1; i < NV; i++) {
+            if (naopronto[i]) {
+                int newdist = dmin[vm] + dvv[vm][i];
+                #pragma omp critical
+                if (newdist < dmin[i]) 
+                    dmin[i] = newdist;
             }
         }
     }
+    }
 }
-int main(int argc, char **argv) {    // tsk_dijkstra.c
+
+int main(int argc, char **argv) {  
     int i;
     init();
     busca();  

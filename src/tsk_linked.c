@@ -12,17 +12,14 @@ struct Node {
 struct Node* searchValue(struct Node* head, int target) {
 struct Node* result;
     if (head == NULL) return NULL;
+    #pragma omp task // Divide a busca em tarefas independentes
 
-    // Divide a busca em tarefas independentes
-    #pragma omp task
     if (head->data == target) {
         printf("Valor %d encontrado na thread %d\n", target, omp_get_thread_num());
 	result = head;
-    //    return head;
+//        return head;
     }
-    else{
-
-    // Continua a busca no próximo nó
+    else{ // Continua a busca no próximo nó
     #pragma omp task
     result = searchValue(head->next, target);
     }
@@ -53,9 +50,8 @@ int main() {
         #pragma omp single
         {
             struct Node* result = searchValue(head, target);
-            if (result == NULL) {
+            if (result == NULL) 
                 printf("Valor %d não encontrado.\n", target);
-            }
         }
     }
 
