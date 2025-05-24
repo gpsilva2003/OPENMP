@@ -3,9 +3,10 @@
 # Compila e gera os executáveis de todos os arquivos com extensão .c
 # presentes no diretório
 #
-#CC=pgcc
-CC=gcc
+CC=pgcc
+#CC=gcc-13
 #CC=icc
+#CC=nvc
 
 #CFLAGS =  -Ofast -qopenmp -w3 -diag-disable:remark
 
