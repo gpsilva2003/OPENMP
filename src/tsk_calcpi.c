@@ -21,7 +21,6 @@ double inicio, fim, soma = 0.0;
    }
    double pi = passo * soma;
    fim = omp_get_wtime();
-   printf("Valor aproximado de pi: %.15f Tempo de execução: %f\n", pi, fim-inici
-o);
+   printf("Valor aproximado de pi: %.15f Tempo de execução: %f\n", pi, fim-inicio);
    return 0;
 }
