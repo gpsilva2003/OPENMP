@@ -4,7 +4,7 @@
 int main() {
     #pragma omp parallel num_threads(4)
     {
-	int tid=omp_get_thread_num();
+	      int tid=omp_get_thread_num();
         #pragma omp single
         {
             printf("Thread %d: Esta thread está criando tarefas para as outras threads.\n", tid);
@@ -21,5 +21,6 @@ int main() {
           // Todas as threads esperam todas as tarefas serem concluídas
     }
     printf("Programa finalizado.\n");
+
     return 0;
 }

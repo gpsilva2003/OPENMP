@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) { /* omp_single.c  */
     printf("Começando Trab2.\n");
     trab2();
     printf("Terminando Trab2.\n");
-    }
+
 }
 return(0);
 }

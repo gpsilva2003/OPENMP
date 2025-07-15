@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <omp.h>
+
 #include <unistd.h>
 void trab1() {
      printf("Trab1 sendo executado pela thread %d\n", omp_get_thread_num());

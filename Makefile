@@ -3,9 +3,10 @@
 # Compila e gera os executáveis de todos os arquivos com extensão .c
 # presentes no diretório
 #
-#CC=pgcc
-CC=gcc
+CC=pgcc
+#CC=gcc-13
 #CC=icc
+#CC=nvc
 
 #CFLAGS =  -Ofast -qopenmp -w3 -diag-disable:remark
 
@@ -44,5 +45,3 @@ list:
 clean:
 	$(RM) $(PROGFILES) *~
 ## eof Makefile
-
-#pgcc -fast -acc -ta=tesla:managed -Minfo=accel -I/opt/pgi/linux86-64/19.10/mpi/openmpi-3.1.3/include -L/opt/pgi/linux86-64/19.10/mpi/openmpi-3.1.3/lib -lmpi acc_funcoes.c  -o teste

@@ -1,9 +1,3 @@
-src/omp_atomic_optimized
-
 old_src/
-
 bin/
-
 .vscode/
-
-Makefile.old
