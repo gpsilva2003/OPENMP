@@ -1,20 +1,31 @@
 #include <stdio.h>
 #include <omp.h>
-void trab1(int tid) {
-     printf("Executando trab1 na thread %d \n", tid);
+#include <unistd.h>
+
+void trab1() {
+     printf("Trab1. executado pela thread %d \n", omp_get_thread_num());
+     sleep(1);  /* Espera um segundo*/
 }
-void trab2(int tid) {
-    printf("Executando trab2 na thread %d \n", tid);
-} 
+
+void trab2() {
+    printf("Trab2. executado pela thread %d \n", omp_get_thread_num());
+}
+    
 int main(int argc, char *argv[]) { /* omp_single.c  */
-#pragma omp parallel num_threads(4)
+#pragma omp parallel num_threads(4)   // Região paralela 
 {
-     int tid =  omp_get_thread_num();
-    /* Trecho executado por uma única thread, aleatoriamente */
-    #pragma omp single
-    trab1(tid);
-    /* Trecho executado por todas as threads, sempre depois de trab1 */
-    trab2(tid);
+    #pragma omp single    // Apenas uma thread executa a primeira tarefa
+    {
+    printf("Começando Trab1.\n");
+    trab1();
+    printf("Terminando Trab1.\n");
+    }
+    #pragma omp single   // Essa segunda tarefa só será executada após a primeira
+    {
+    printf("Começando Trab2.\n");
+    trab2();
+    printf("Terminando Trab2.\n");
+
 }
-    return(0);
+return(0);
 }

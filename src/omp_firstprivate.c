@@ -13,9 +13,9 @@ int nthreads, vlen, indice, offset = 4, i, tid;
     indice = offset;
 
 /* Prepara os parâmetros para a computação e aloca memória */
-#pragma omp parallel firstprivate(indice) shared(a,n,nthreads)
+#pragma omp parallel firstprivate(indice) shared(a, n, nthreads)
 {
-    tid = omp_get_thread_num();
+    int tid = omp_get_thread_num();
     if (tid == 0) {
     	nthreads = omp_get_num_threads();
     	vlen = indice + n*nthreads;

@@ -1,35 +1,28 @@
-#include <omp.h>
 #include <stdio.h>
+#include <omp.h>
 
-// Função para calcular o n-ésimo número de Fibonacci recursivamente
-int fibonacci(int n) {
-    if (n <= 2) {
-        return 1;
+int fib(int n) {
+    if (n < 2) {
+        return n;
     } else {
-        int x, y;
-        #pragma omp task shared(x)
-        x = fibonacci(n - 1);
-
-        #pragma omp task shared(y)
-        y = fibonacci(n - 2);
-
+        int i, j;
+        #pragma omp task shared(i)
+        i = fib(n - 1);
+        #pragma omp task shared(j)
+        j = fib(n - 2);
         #pragma omp taskwait
-        return x + y;
+        return i + j;
     }
 }
 
 int main() {
-    int n = 10; // Número de Fibonacci desejado
-
+    int n = 20;
+    int resultado;
     #pragma omp parallel
     {
         #pragma omp single
-        {
-            int result = fibonacci(n);
-            printf("O %dº número de Fibonacci é: %d\n", n, result);
-        }
+        resultado = fib(n);
     }
-
+    printf("O %d-ésimo número de Fibonacci é: %d\n", n, resultado);
     return 0;
 }
-
