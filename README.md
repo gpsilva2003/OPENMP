@@ -4,7 +4,7 @@ Este repositório tem os exemplos em OpenMP do livro "Programação Paralela e D
 Todos os arquivos podem ser compilados com uso do Makefile usando o comando make. 
 Para executar os programas compilados podem ser o comando "make run PROG=nomedoprograma". 
 
-Para detalhes sobre o ambiente de execução e uso dos compiladores cosnulte o arquivo de  [Preparação do Ambiente](docs/preparacao.md)
+Para detalhes sobre o ambiente de execução e uso dos compiladores cosnulte o arquivo de  [Preparação do Ambiente](docs/ambiente.md).
 
 ## Preparação do Ambiente de Execução OpenMP 
 
