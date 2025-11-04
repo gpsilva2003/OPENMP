@@ -75,8 +75,6 @@ srun --ntasks=1 echo "I'm task 2"
 
 O Slurm poderá alocar as tarefas em nós diferentes, conforme disponibilidade.
 
----
-
 ### Jobs multithread (SMP)
 
 Se seu comando usa múltiplas threads:
@@ -107,8 +105,6 @@ srun --ntasks=1 mycommand2 --threads 4
 srun --ntasks=1 mycommand3 --threads 4
 srun --ntasks=1 mycommand4 --threads 4
 ```
-
----
 
 ###  Jobs MPI
 
