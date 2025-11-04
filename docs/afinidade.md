@@ -206,17 +206,18 @@ Também existe uma sintaxe geral:
 Valores possíveis para `OMP_PROC_BIND`:
 
 * `false`: sem vinculação;
-* `true`: vincula thread a um núcleo;
-* `master`: co-localiza threads com a thread mestre;
-* `close`: coloca threads próximas da mestre na lista de locais;
-* `spread`: distribui as threads o máximo possível.
+* `true`: vincula a execução das *threads* ao mesmo núcleo;
+* `master`: co-localiza *threads* com a *thread* mestre;
+* `close`: coloca *threads* próximas da *thread* mestre conforme a  lista de locais;
+* `spread`: distribui as *threads* o máximo possível, mas vincula ao núcleo em execução. 
 
-Esses efeitos podem ser **locais** com a cláusula `proc_bind` na diretiva `parallel`.
+Esses efeitos podem ser **locais** com uso da cláusula `proc_bind` na diretiva `parallel` do OpenMP.
 
 **Configuração padrão segura:**
 
 ```bash
-export OMP_PROC_BIND=true
+export OMP_PLACES=cores
+export OMP_PROC_BIND=spread
 ```
 
 Isso evita que o sistema operacional migre *threads*, o que **previne diversos problemas de escalabilidade**.
