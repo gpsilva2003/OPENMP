@@ -11,8 +11,6 @@ A importância do **controle de afinidade de *threads*** no **OpenMP** está dir
 
 Além disso, em sistemas com mais de um soquete, a comunicação entre soquetes ocorre por meio de interconexões (como o **Intel QPI** ou **AMD Infinity Fabric**), que também introduzem **diferenças de latência e largura de banda** — essa característica é conhecida como **arquitetura NUMA (Non-Uniform Memory Access)**.
 
----
-
 ### Problema: movimentação não controlada de *threads*
 
 Quando um programa paralelo em OpenMP é executado, o sistema operacional é responsável por **atribuir as *threads* aos núcleos físicos disponíveis**. Por padrão, essa atribuição é dinâmica: o sistema pode **mover *threads*** entre núcleos durante a execução (no que é conhecido como migração de *threads*). Essa movimentação pode causar **perda de desempenho**, pois:
@@ -20,8 +18,6 @@ Quando um programa paralelo em OpenMP é executado, o sistema operacional é res
 * a *thread* pode perder os dados que estavam armazenados no cache do núcleo anterior (ocasionando um aumento de *cache misses*);
 * os acessos à memória podem se tornar **não locais** (NUMA), aumentando a latência;
 * o balanceamento de carga pode se tornar imprevisível, especialmente em aplicações sensíveis à localização dos dados.
-
----
 
 ### Solução: controle de afinidade de *threads*
 
@@ -45,8 +41,6 @@ Em OpenMP, isso pode ser configurado de várias formas, por exemplo:
 
 Esse controle garante que cada *thread* permaneça sempre no mesmo núcleo, preservando o conteúdo do cache e reduzindo a latência no acesso à memória local.
 
----
-
 ### Benefícios práticos
 
 O uso adequado da afinidade de *threads* proporciona:
@@ -66,8 +60,6 @@ O  posicionamento das *threads* pode ser controlado por meio de duas variáveis 
 * **OMP_PLACES**: descreve esses "lugares" em termos do *hardware* disponível.
 
 Quando estiver experimentando essas variáveis, é recomendável definir **OMP_DISPLAY_ENV=true**, para que o OpenMP imprima, em tempo de execução, como interpretou sua especificação. Os exemplos nas seções seguintes mostram essa saída.
-
----
 
 **Valores típicos de `OMP_PLACES`:**
 
@@ -209,7 +201,7 @@ Também existe uma sintaxe geral:
 
 ---
 
-### Possibilidades de vinculação**
+### Possibilidades de vinculação
 
 Valores possíveis para `OMP_PROC_BIND`:
 
