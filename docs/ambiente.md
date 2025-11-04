@@ -40,7 +40,7 @@ O GCC 13 implementa diversos recursos do OpenMP 5.2 e amplia o suporte às vers�
 A seguir apresentamos o comando para a compilação do programa com o
 compilador gcc:
 
-``` {style="verbatim"}
+```bash
 $ gcc omp_hello.c -fopenmp -o teste
 ```
 
@@ -49,20 +49,20 @@ antes da execução de um programa. Isso pode ser feito co uso da variável
 de ambiente OMP_NUM_THREADS, cujo valor é definido com o seguinte
 comando:
 
-``` {style="verbatim"}
+```bash
 $ export OMP_NUM_THREADS=4
 ```
 
 ou
 
-``` {style="verbatim"}
+```bash
 $ setenv OMP_NUM_THREADS 4
 ```
 
 A execução é bem simples, sem necessidade de comando adicionais, para
 qualquer uma das versões de compilador:
 
-``` {style="verbatim"}
+```bash
 $ ./teste
 ```
 
@@ -80,7 +80,7 @@ As limitações conhecidas são as seguintes: as diretivas **simd** e
 O suporte para o OpenMP 3.1 é completo para as linguagens C/C++/Fortran
 nos sistemas operacionais MacOS e Linux.
 
-``` {style="verbatim"}
+```bash
 $ pgcc omp_hello.c -mp -o teste
 ```
 
@@ -99,15 +99,19 @@ sistemas operacionais Windows, Linux, and MacOSX.
 | Intel Compiler 2025.0 (ifx)     | OpenMP 6.0 elementos implementados | C/C++/Fortran          |
 
 
-``` {style="verbatim"}
+Compile com `-Qopenmp` no Windows, ou apenas `-qopenmp` or `–fiopenmp` no Linux ou Mac OSX. Compile com `-fiopenmp -fopenmp-targets=spir64` no Windows e Linux para suporte de  *offloading*. 
+
+```bash
 $ icc omp_hello.c -qopenmp -o teste
-$ icc omp_hello.c -openmp -o teste
+$ icc omp_hello.c -fiopenmp -o teste
 ```
 
 Para a geração de um relatório com diagnóstico de paralelização, compile
 o programa com os comandos a seguir:
 
-    $ icc -o myprog myprog.c -openmp -openmp_report2
+```bash
+    $ icc -o myprog myprog.c -qopenmp -openmp_report2
+```
 
 Há suporte para todas as facilidades que não requerem *offloading* da
 versão 4.5 do OpenMP. O suporte para as construções que resultam em
@@ -139,7 +143,7 @@ bibliotecas de execução.
 
 Para instalação do Clang do diretamente a partir repositório:
 
-``` {style="verbatim"}
+```bash
 $ sudo dnf install clang
 ```
 
@@ -147,14 +151,14 @@ $ sudo dnf install clang
 
 Para instalação do Clang diretamente do repositório:
 
-``` {style="verbatim"}
+```bash
 $ sudo apt-get install clang
 ```
 
 O Clang foi projetado para oferecer suporte à linguagens de programação
 C e C++ e sua execução é simples:
 
-``` {style="verbatim"}
+```bash
 $ clang omp_hello.c -fopenmp -o teste
 $ clang++ omp_hello.c -fopenmp -o teste
 ```
@@ -187,7 +191,7 @@ OMP_THREAD_LIMIT é 64.
     variáveis de ambiente GOMP_CPU_AFFINITY e OMP_PROC_BIND estiverem
     definidas, então OMP_PROC_BIND tem maior precedência.
 
-    ``` {style="verbatim"}
+    ```bash
     $ export GOMP_CPU_AFFINITY="0 3 1-2 4-15:2"
     $ export GOMP_CPU_AFFINITY=0
     ```
