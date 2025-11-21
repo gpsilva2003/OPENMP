@@ -9,8 +9,8 @@ double inicio, fim, soma = 0.0;
    inicio = omp_get_wtime();
    #pragma omp parallel for reduction(+: soma)
    for (long int i = 0; i < num_passos; i++) {
-      double x = (i + 0.5) * passo;
-      soma += 4.0 / (1.0 + x * x);
+        double x = (i + 0.5) * passo;
+        soma += 4.0 / (1.0 + x * x);
    }
    double pi = soma * passo;
    fim = omp_get_wtime();
